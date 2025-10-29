@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 import random
+import html
 import string
 
 # Create your views here.
@@ -16,5 +17,6 @@ def about_view(request:HttpRequest):
 def password_generate(request:HttpRequest):
     characters = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(random.choice(characters) for i in range(10))
-    content = f"Your generated password is : {password}"
+    html_password = html.escape(password)
+    content = f"Your generated password is : {html_password}"
     return HttpResponse(content)
